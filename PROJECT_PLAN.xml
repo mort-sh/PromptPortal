@@ -1,0 +1,822 @@
+<project-prompt>
+    <project-title>PromptPortal</project-title>
+
+    <project-description>
+        PromptPortal is a comprehensive knowledge base and unifying hub for AI agentic prompting that bridges
+        the fragmented landscape of AI development tools. It aggregates, organizes, and translates prompts,
+        instructions, rules, MCP configurations, and best practices across multiple AI platforms, providing
+        a seamless integration layer that abstracts away provider-specific differences. PromptPortal enables
+        developers to write once and deploy everywhere, reducing duplication and maintenance overhead while
+        ensuring consistency across AI toolchains.
+
+        The project leverages [mort-sh/PromptPortal](https://github.com/mort-sh/PromptPortal) (a fork of GitHub's
+        awesome-copilot repository) as the foundation, which contains 300+ community-contributed GitHub Copilot
+        customizations in a YAML frontmatter + Markdown format. The project extends this foundation by adding
+        cross-platform translation capabilities to generate configurations for Cursor, Claude, and other AI tools.
+
+        Additionally, [mort-sh/PromptPortal-MCP](https://github.com/mort-sh/PromptPortal-MCP) provides a fully-functional
+        .NET 9 MCP server that dynamically serves these customizations to MCP-compatible clients (Claude Desktop, VS Code,
+        Visual Studio) without requiring static file generation.
+    </project-description>
+
+    <core-value-proposition>
+        <problem>
+            AI developers face fragmentation across tools (GitHub Copilot, Cursor, Claude, etc.), each with
+            unique configuration formats, prompting conventions, and capabilities. This leads to duplicated
+            effort, inconsistent experiences, and difficulty maintaining prompts across platforms.
+        </problem>
+        <solution>
+            PromptPortal provides a unified source of truth for AI prompting resources with intelligent
+            translation and adaptation capabilities. It offers two integration paths: a static file generation
+            workflow for broad compatibility, and a dynamic MCP server for real-time context serving, allowing
+            teams to maintain a single, well-organized repository that serves all their AI tooling needs.
+        </solution>
+    </core-value-proposition>
+
+    <goals>
+        <primary-goal>
+            Create a comprehensive, well-structured, and easily navigable repository that enables developers
+            to effectively author, version-control, share, and deploy AI prompting resources across different
+            platforms with minimal friction.
+        </primary-goal>
+        <secondary-goals>
+            <goal>Reduce duplication and maintenance overhead for multi-platform AI configurations</goal>
+            <goal>Establish best practices and patterns for agentic AI prompting</goal>
+            <goal>Foster a community-driven ecosystem for sharing high-quality prompts and configurations</goal>
+            <goal>Provide educational resources and examples for effective prompt engineering</goal>
+            <goal>Enable version control and collaborative workflows for AI tooling configurations</goal>
+        </secondary-goals>
+    </goals>
+
+    <areas-of-focus>
+        <area priority="high">
+            <name>Universal Resource Management</name>
+            <description>
+                Provide a structured, hierarchical repository system that categorizes and organizes:
+
+                **Prompts (Rules)**: Reusable, task-oriented prompts that describe *what* should be done
+                    • Code generation prompts (e.g., "Generate REST API endpoints", "Create React components")
+                    • Review and analysis prompts (e.g., "Perform security audit", "Review for accessibility")
+                    • Documentation prompts (e.g., "Generate API docs", "Create README sections")
+                    • Debugging and troubleshooting prompts
+
+                **Instructions (Commands)**: Guidelines and rules that define *how* tasks should be performed
+                    • Coding standards and style guides (e.g., "Use functional React patterns", "Follow Airbnb style")
+                    • Technology preferences (e.g., "Prefer TypeScript over JavaScript", "Use Prisma for databases")
+                    • Project-specific requirements (e.g., "Follow monorepo structure", "Use conventional commits")
+                    • Quality and testing standards
+
+                **Chat Modes**: Scoped interaction patterns that define tool access and behavior
+                    • Development modes (e.g., "full-stack", "backend-only", "frontend-focused")
+                    • Review modes (e.g., "security-focused", "performance-focused")
+                    • Documentation modes
+                    • Context-specific modes (e.g., "production-debugging", "rapid-prototyping")
+
+                **MCP (Model Context Protocol) Configurations**: External context and tool integrations
+                    • Database connections and query tools
+                    • API integrations and external services
+                    • File system and repository access
+                    • Custom tool definitions
+
+                **Agent Configurations**: Specialized AI assistants with defined roles and capabilities
+                    • Role-based agents (e.g., "senior-backend-engineer", "security-specialist")
+                    • Domain-specific agents (e.g., "devops-agent", "data-analyst")
+                    • Multi-step workflow agents
+            </description>
+        </area>
+
+        <area priority="high">
+            <name>Cross-Platform Support</name>
+            <description>
+                Support comprehensive configuration and deployment for major AI development platforms:
+
+                **IDE Integrations**
+                    • GitHub Copilot (VS Code, JetBrains, Neovim)
+                    • Cursor (custom rules, composer modes)
+                    • Zed (assistant configurations)
+                    • Continue.dev (config.json, custom context providers)
+                    • Cody (Sourcegraph)
+
+                **API-Based Services**
+                    • OpenAI (GPT-4, GPT-5, Codex)
+                    • Anthropic Claude (3.5 Sonnet, 4 Opus)
+                    • Google Gemini (Pro, Ultra, Code)
+                    • Mistral AI
+                    • Local models (Ollama, LM Studio)
+
+                **Platform-Specific Features**
+                    • Workspace-level vs. user-level configurations
+                    • Project-specific overrides and inheritance
+                    • Team sharing and collaboration mechanisms
+            </description>
+        </area>
+
+        <area priority="critical">
+            <name>Intelligent Integration Layer</name>
+            <description>
+                Develop a sophisticated dual-strategy integration engine:
+
+                **Strategy A: Static Translation (Core)**
+                *Leveraging [mort-sh/PromptPortal](https://github.com/mort-sh/PromptPortal)*
+
+                **Schema Translation**
+                    • Bidirectional conversion between platform-specific formats (JSON, YAML, TOML, Markdown)
+                    • Preservation of semantic meaning across format differences
+                    • Intelligent mapping of equivalent concepts (e.g., Copilot "agents" ↔ Cursor "custom modes")
+
+                **Configuration Generation**
+                    • CLI tools for generating platform-specific configs from universal definitions
+                    • Validation and linting for generated configurations
+
+                **Strategy B: Dynamic MCP Server (Optional)**
+                *Leveraging [mort-sh/PromptPortal-MCP](https://github.com/mort-sh/PromptPortal-MCP)*
+
+                **Runtime Context Serving**
+                    • Serves prompts, rules, and instructions directly to MCP-compliant clients (Claude, Cursor, etc.)
+                    • Bypasses the need for generating and syncing local configuration files
+                    • Provides "just-in-time" context based on the user's current task
+
+                **Shared Capabilities (Both Strategies)**
+
+                **Capability Detection and Adaptation**
+                    • Feature compatibility matrix across platforms
+                    • Graceful degradation when features aren't available
+
+                **Semantic Prompt Optimization**
+                    • Platform-aware prompt reformatting (e.g., concise for Claude 4, detailed for GPT-4)
+                    • Model-specific instruction adaptation
+
+                **Context Management**
+                    • Intelligent chunking for large context windows
+                    • Cross-reference resolution (e.g., @workspace, #file references)
+            </description>
+        </area>
+
+        <area priority="medium">
+            <name>Developer Experience & Tooling</name>
+            <description>
+                **CLI and Automation**
+                    • Command-line interface for managing prompts and configurations
+                    • Import/export utilities for existing configurations
+                    • Batch deployment to multiple platforms
+                    • CI/CD integration for automated syncing
+
+                **Discovery and Search**
+                    • Categorized browsing by task, domain, or platform
+                    • Full-text search across prompts and instructions
+                    • Tag-based filtering and organization
+                    • Popularity and effectiveness metrics
+
+                **Quality Assurance**
+                    • Prompt testing framework with example inputs/outputs
+                    • Automated validation against platform schemas
+                    • Lint rules for prompt quality
+                    • Community ratings and feedback system
+
+                **Documentation and Examples**
+                    • Comprehensive guides for each supported platform
+                    • Annotated examples demonstrating best practices
+                    • Migration guides from platform-specific to universal formats
+                    • Video tutorials and walkthroughs
+            </description>
+        </area>
+
+        <area priority="medium">
+            <name>Community and Collaboration</name>
+            <description>
+                **Sharing Mechanisms**
+                    • Public prompt marketplace/catalog
+                    • Team/organization private repositories
+                    • Contribution guidelines and review process
+                    • Attribution and licensing support
+
+                **Version Control Integration**
+                    • Git-based workflows for prompt evolution
+                    • Semantic versioning for prompt definitions
+                    • Change tracking and rollback capabilities
+                    • Collaborative editing and review workflows
+
+                **Extensibility**
+                    • Plugin system for custom platform adapters
+                    • Hooks for custom validation and processing
+                    • API for programmatic access
+                    • Webhooks for automation and integrations
+            </description>
+        </area>
+    </areas-of-focus>
+
+    <technical-architecture>
+        <foundations>
+            <primary-repo>
+                <name>PromptPortal (mort-sh/PromptPortal)</name>
+                <url>https://github.com/mort-sh/PromptPortal</url>
+                <role>
+                    Fork of GitHub's awesome-copilot repository containing 300+ GitHub Copilot customizations.
+                    Provides the canonical content library and serves as the knowledge base foundation.
+                    Uses YAML frontmatter + Markdown format with automated metadata extraction via Node.js scripts.
+                </role>
+                <current-capabilities>
+                    • 110+ prompts for task-specific workflows
+                    • 100+ instructions for language/framework coding standards
+                    • 26 custom agents with MCP integrations
+                    • 90+ specialized chat modes
+                    • Collections system for bundling related customizations
+                    • JSON schema validation for content structure
+                    • Automated README generation from frontmatter metadata
+                </current-capabilities>
+            </primary-repo>
+            <secondary-repo>
+                <name>PromptPortal-MCP (mort-sh/PromptPortal-MCP)</name>
+                <url>https://github.com/mort-sh/PromptPortal-MCP</url>
+                <role>
+                    Production-ready .NET 9 MCP server that dynamically serves PromptPortal content.
+                    Supports stdio and HTTP-based MCP protocol for real-time context delivery.
+                    Already deployed as a Docker container (ghcr.io/microsoft/mcp-dotnet-samples/awesome-copilot).
+                </role>
+                <current-capabilities>
+                    • MCP Tools: search_instructions, load_instruction
+                    • MCP Prompts: get_search_prompt
+                    • Hybrid hosting (stdio + HTTP)
+                    • VS Code, VS Code Insiders, and Visual Studio integration
+                    • Docker containerization for easy deployment
+                    • Metadata service for dynamic content discovery
+                </current-capabilities>
+            </secondary-repo>
+        </foundations>
+
+        <existing-structure>
+            Current directory layout in mort-sh/PromptPortal:
+
+            prompts/              # Task-specific prompts (110+ files: *.prompt.md)
+            instructions/         # Language/framework guidelines (100+ files: *.instructions.md)
+            agents/              # Custom MCP-integrated agents (26 files: *.agent.md)
+            chatmodes/           # Specialized AI personas (90+ files: *.chatmode.md)
+            collections/         # Curated bundles of related content (*.md with YAML manifest)
+            .schemas/            # JSON schemas for validation (collection.schema.json)
+            eng/                 # Node.js build scripts (update-readme.mjs, validate-collections.mjs)
+            docs/                # Auto-generated documentation and catalogs
+            .github/             # GitHub workflows and configurations
+        </existing-structure>
+
+        <extensions-needed>
+            To achieve cross-platform support, the following additions are required:
+
+            adapters/            # NEW: Platform-specific translation logic
+              ├── cursor/        # Cursor .cursorrules generator
+              ├── claude/        # Claude API system prompt formatter
+              ├── openai/        # OpenAI API message formatter
+              ├── gemini/        # Gemini API contents array generator
+              └── ...
+
+            cli/                 # NEW: Command-line tool for format conversion
+              ├── translate.js   # Core translation engine
+              ├── deploy.js      # Batch deployment to multiple platforms
+              └── validate.js    # Cross-platform validation
+
+            tests/               # NEW: Test suites for translation accuracy
+
+            schemas/             # EXPAND: Add schemas for other platforms
+              ├── cursor.schema.json
+              ├── claude.schema.json
+              └── ...
+        </extensions-needed>
+
+        <canonical-format>
+            The established format (already in use by 300+ files):
+
+            **YAML Frontmatter** (metadata):
+                • name: Display name
+                • description: Purpose and usage
+                • mode: 'agent' | 'prompt' | 'instruction' | 'chatmode'
+                • applyTo: File pattern (for instructions)
+                • tags: Array of categorization tags
+                • mcp: MCP server references (for agents)
+
+            **Markdown Body** (content):
+                • Structured sections (## Role, ## Task, ## Guidelines, etc.)
+                • Plain text instructions and prompts
+                • Code examples where applicable
+
+            This format already supports:
+                ✓ Human-readable and version-control friendly
+                ✓ Metadata extraction via Node.js scripts
+                ✓ MCP server dynamic serving
+                ✓ GitHub Copilot direct consumption
+
+            Extensions needed:
+                • Platform-specific override fields in frontmatter
+                • Translation hints for semantic adaptation
+                • Compatibility tags for feature detection
+        </canonical-format>
+
+        <translation-engine>
+            **Static Translation Engine (NEW - To Be Built)**
+            Extend mort-sh/PromptPortal with platform adapters that:
+                • Parse YAML frontmatter + Markdown canonical format
+                • Apply platform-specific transformations:
+                  - Cursor: Generate .cursorrules files with @-mentions syntax
+                  - Claude API: Format as system prompts with conversation structure
+                  - OpenAI API: Convert to system/user message arrays with function calls
+                  - Gemini API: Transform to contents array with system instructions
+                • Generate valid configuration files per platform schema
+                • Validate output against platform requirements
+                • Report compatibility warnings (e.g., "MCP agents not supported on Platform X")
+
+            **Dynamic MCP Server (ALREADY FUNCTIONAL)**
+            mort-sh/PromptPortal-MCP currently implements:
+                • Reads YAML frontmatter metadata from PromptPortal content
+                • Exposes MCP protocol endpoints (stdio + HTTP)
+                • Serves prompts/instructions/tools to MCP-compliant clients
+                • Provides real-time search and filtering via MCP tools
+                • Eliminates need for static config file generation
+                • Already deployed and installable in VS Code/Visual Studio
+
+            **Strategy Comparison**
+
+            | Feature | Static Translation (TO BUILD) | MCP Server (BUILT) |
+            |---------|-------------------------------|---------------------|
+            | Current Status | ⚠️ Not yet implemented | ✅ Production-ready |
+            | Setup Complexity | Medium (CLI installation, per-platform generation) | Low (Docker pull + MCP config) |
+            | Real-time Updates | No (requires CLI re-run) | Yes (immediate) |
+            | Platform Support | Broad (any tool with config files) | Limited (MCP-compatible only) |
+            | Offline Usage | Yes (configs are local) | Requires MCP server connection |
+            | Best For | Cursor, Zed, Continue.dev, API-based tools | VS Code, Visual Studio, Claude Desktop |
+            | Implementation Priority | Phase 2-3 (core value add) | Phase 1 (already done, needs docs) |
+        </translation-engine>
+            | Setup Complexity | Medium (requires per-platform config generation) | Low (single server connection) |
+            | Real-time Updates | No (requires regeneration) | Yes (immediate) |
+            | Platform Support | Broad (any tool with config files) | Limited (MCP-compatible clients only) |
+            | Offline Usage | Yes | Requires server connection |
+            | Best For | CI/CD pipelines, broad compatibility | Claude Desktop, Cursor, dynamic contexts |
+        </translation-engine>
+
+        <integration-between-strategies>
+            Both strategies share the same canonical YAML frontmatter + Markdown content:
+                • Changes to prompts/instructions in PromptPortal are immediately available to MCP server
+                • Static translation reads the same files to generate platform-specific configs
+                • Teams can use both strategies simultaneously for different tools
+                • Migration between strategies requires no content changes, only deployment method
+                • Documentation provides guidance on choosing the right strategy per use case
+        </integration-between-strategies>
+
+        <current-state-vs-target-state>
+            **What Already Exists:**
+            ✅ 300+ GitHub Copilot customizations (prompts, instructions, agents, chat modes)
+            ✅ YAML frontmatter + Markdown canonical format
+            ✅ Fully functional MCP server with Docker deployment
+            ✅ Node.js build scripts for metadata extraction and validation
+            ✅ JSON schemas for content structure validation
+            ✅ VS Code/Visual Studio MCP integration
+
+            **What Needs to Be Built (Core Value Add):**
+            ❌ Cross-platform translation engine (CLI tool)
+            ❌ Platform-specific adapters (Cursor, Claude API, OpenAI, Gemini, etc.)
+            ❌ Semantic prompt optimization for different models
+            ❌ Batch deployment and CI/CD tooling
+            ❌ Web-based catalog/marketplace UI
+            ❌ Import utilities for existing platform-specific configs
+            ❌ Comprehensive documentation for multi-platform workflows
+
+            **Project Focus:**
+            The primary deliverable is building the translation layer that takes the existing
+            PromptPortal content and makes it universally accessible across AI platforms,
+            not building a new content library from scratch.
+        </current-state-vs-target-state>
+    </technical-architecture>   <success-metrics>
+        <metric>Number of supported platforms and their coverage completeness</metric>
+        <metric>Quality and growth of the canonical content library (currently 300+ items, target 1000+)</metric>
+        <metric>Accuracy and reliability of cross-platform translations (target: 95%+ semantic equivalence)</metric>
+        <metric>MCP server adoption rate and active connection metrics (VS Code/Visual Studio/Claude Desktop)</metric>
+        <metric>CLI tool usage: number of downloads, platform generations, and deployments</metric>
+        <metric>User preference distribution between static translation and MCP server approaches</metric>
+        <metric>Reduction in configuration maintenance time for multi-platform users (target: 70%+ reduction)</metric>
+        <metric>Community engagement: contributions, pull requests, stars, forks, and issues</metric>
+        <metric>Documentation completeness and user satisfaction (via surveys and feedback)</metric>
+        <metric>Platform vendor partnerships and official integration support</metric>
+    </success-metrics></project-prompt>
+
+<resources>
+    <purpose>
+        A curated collection of official documentation, repositories, and resources for understanding
+        prompting conventions, configuration schemas, and best practices across AI platforms. These
+        resources inform the development of PromptPortal's translation layer and ensure compatibility
+        with each platform's unique requirements and capabilities.
+    </purpose>
+
+    <resource-categories>
+        <category name="platform-specific">Platform-specific configuration formats and conventions</category>
+        <category name="prompting-guides">General and model-specific prompt engineering guidance</category>
+        <category name="mcp">Model Context Protocol specifications and implementations</category>
+        <category name="best-practices">Software development and AI-assisted coding patterns</category>
+        <category name="examples">Real-world prompt libraries and catalogs</category>
+    </resource-categories>
+
+    <github-copilot>
+        <metadata>
+            <supported-versions>Latest (2024+)</supported-versions>
+            <config-format>JSON (.github/copilot-instructions.json, .github/copilot-agents.json)</config-format>
+            <unique-features>Deep GitHub integration, workspace agents, extensibility API</unique-features>
+        </metadata>
+
+        <official-catalogs category="examples">
+            <custom-agent-catalog>
+                https://github.com/github/awesome-copilot/raw/refs/heads/main/docs/README.agents.md
+            </custom-agent-catalog>
+            <custom-mode-catalog>
+                https://github.com/github/awesome-copilot/raw/refs/heads/main/docs/README.chatmodes.md
+            </custom-mode-catalog>
+            <custom-instruction-catalog>
+                https://github.com/github/awesome-copilot/raw/refs/heads/main/docs/README.instructions.md
+            </custom-instruction-catalog>
+            <custom-prompt-catalog>
+                https://github.com/github/awesome-copilot/raw/refs/heads/main/docs/README.prompts.md
+            </custom-prompt-catalog>
+            <catalog-repository>
+                https://github.com/github/awesome-copilot
+            </catalog-repository>
+        </official-catalogs>
+
+        <documentation>
+            <fundamentals category="prompting-guides">
+                <best-practices>https://docs.github.com/en/copilot/get-started/best-practices.md</best-practices>
+                <prompt-engineering>https://docs.github.com/en/copilot/concepts/prompting/prompt-engineering.md</prompt-engineering>
+            </fundamentals>
+
+            <testing category="best-practices">
+                <generate-unit-tests>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/testing-code/generate-unit-tests.md</generate-unit-tests>
+                <create-mock-objects>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/testing-code/create-mock-objects.md</create-mock-objects>
+                <create-e2e-tests>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/testing-code/create-end-to-end-tests.md</create-e2e-tests>
+            </testing>
+
+            <refactoring category="best-practices">
+                <decouple-business-logic>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/refactor-code/decouple-business-logic.md</decouple-business-logic>
+                <design-patterns>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/refactor-code/refactor-design-patterns.md</design-patterns>
+                <code-readability>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/refactor-code/improve-code-readability.md</code-readability>
+                <optimization>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/refactor-code/refactor-for-optimization.md</optimization>
+            </refactoring>
+
+            <collaboration category="best-practices">
+                <explore-pull-requests>https://docs.github.com/en/copilot/tutorials/explore-pull-requests.md</explore-pull-requests>
+                <explore-issues>https://docs.github.com/en/copilot/tutorials/explore-issues-and-discussions.md</explore-issues>
+                <creating-issues>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/document-code/creating-issues.md</creating-issues>
+                <sync-documentation>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/document-code/sync-documentation.md</sync-documentation>
+                <creating-templates>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/communicate-effectively/creating-templates.md</creating-templates>
+                <accelerate-prs>https://docs.github.com/en/copilot/tutorials/roll-out-at-scale/drive-downstream-impact/accelerate-pull-requests.md</accelerate-prs>
+                <write-blog-posts>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/document-code/write-discussions-or-blog-posts.md</write-blog-posts>
+                <synthesizing-research>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/communicate-effectively/synthesizing-research.md</synthesizing-research>
+            </collaboration>
+
+            <security category="best-practices">
+                <find-vulnerabilities>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/analyze-security/find-vulnerabilities.md</find-vulnerabilities>
+                <secure-repository>https://docs.github.com/en/copilot/tutorials/copilot-chat-cookbook/analyze-security/secure-your-repository.md</secure-repository>
+            </security>
+
+            <customization category="platform-specific">
+                <agents-config>https://docs.github.com/en/copilot/reference/custom-agents-configuration.md</agents-config>
+                <first-prompt-file>https://docs.github.com/en/copilot/tutorials/customization-library/prompt-files/your-first-prompt-file.md</first-prompt-file>
+                <response-customization>https://docs.github.com/api/article/body?pathname=/en/copilot/concepts/prompting/response-customization.md</response-customization>
+                <first-custom-agent>https://docs.github.com/en/copilot/tutorials/customization-library/custom-agents/your-first-custom-agent.md</first-custom-agent>
+                <first-custom-instructions>https://docs.github.com/en/copilot/tutorials/customization-library/custom-instructions/your-first-custom-instructions.md</first-custom-instructions>
+            </customization>
+
+            <mcp category="mcp">
+                <mcp-concepts>https://docs.github.com/en/copilot/concepts/context/mcp.md</mcp-concepts>
+                <enhance-agent-with-mcp>https://docs.github.com/en/copilot/tutorials/enhance-agent-mode-with-mcp.md</enhance-agent-with-mcp>
+            </mcp>
+        </documentation>
+    </github-copilot>
+
+    <openai>
+        <metadata>
+            <supported-models>GPT-4, GPT-4 Turbo, GPT-5, GPT-5.1, Codex</supported-models>
+            <config-format>API-based (system/user messages, function calling)</config-format>
+            <unique-features>Function calling, structured outputs, vision, DALL-E integration</unique-features>
+        </metadata>
+
+        <documentation category="prompting-guides">
+            <prompt-optimization>https://cookbook.openai.com/examples/gpt-5/prompt-optimization-cookbook</prompt-optimization>
+            <frontend-integration>https://cookbook.openai.com/examples/gpt-5/gpt-5_frontend</frontend-integration>
+        </documentation>
+
+        <model-specific category="prompting-guides">
+            <gpt-5>
+                <prompting-guide>https://cookbook.openai.com/examples/gpt-5/gpt-5_prompting_guide</prompting-guide>
+                <notes>GPT-5 introduces enhanced reasoning capabilities and improved context understanding</notes>
+            </gpt-5>
+            <gpt-5-1>
+                <prompting-guide>https://cookbook.openai.com/examples/gpt-5/gpt-5-1_prompting_guide</prompting-guide>
+                <notes>GPT-5.1 offers refined instruction following and reduced hallucination rates</notes>
+            </gpt-5-1>
+            <codex>
+                <prompting-guide>https://cookbook.openai.com/examples/gpt-5-codex_prompting_guide</prompting-guide>
+                <notes>Codex is optimized for code generation and understanding programming languages</notes>
+            </codex>
+        </model-specific>
+    </openai>
+
+    <anthropic>
+        <metadata>
+            <supported-models>Claude 3 (Haiku, Sonnet, Opus), Claude 3.5, Claude 4</supported-models>
+            <config-format>API-based (system prompts, multi-turn conversations)</config-format>
+            <unique-features>Extended context (200K+ tokens), thinking/reasoning modes, artifacts, computer use</unique-features>
+        </metadata>
+
+        <documentation>
+            <core-resources category="prompting-guides">
+                <llms-txt>https://platform.claude.com/llms.txt</llms-txt>
+                <llms-full-txt>https://platform.claude.com/llms-full.txt</llms-full-txt>
+                <prompt-engineering-overview>https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/overview.md</prompt-engineering-overview>
+                <be-clear-and-direct>https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/be-clear-and-direct.md</be-clear-and-direct>
+                <prompt-library>https://platform.claude.com/docs/en/resources/prompt-library/library</prompt-library>
+            </core-resources>
+
+            <interactive-tutorial category="examples">
+                <repository>https://github.com/anthropics/prompt-eng-interactive-tutorial.git</repository>
+            </interactive-tutorial>
+
+            <model-specific category="prompting-guides">
+                <claude-4-best-practices>
+                    <url>https://platform.claude.com/docs/en/build-with-claude/prompt-engineering/claude-4-best-practices.md</url>
+                    <key-points>
+                        - Claude 4 is a reasoning model requiring concise, direct prompts
+                        - Avoid verbose prompt engineering techniques used for older models
+                        - Explicitly request verbosity if conversational tone is needed
+                        - Place instructions AFTER large data context for better grounding
+                    </key-points>
+                </claude-4-best-practices>
+            </model-specific>
+        </documentation>
+    </anthropic>
+
+    <google-gemini>
+        <metadata>
+            <supported-models>Gemini 1.5 (Flash, Pro), Gemini 2.0, Gemini 3 (Flash, Pro)</supported-models>
+            <config-format>API-based (contents array, system instructions)</config-format>
+            <unique-features>Native multimodal (text, image, video, audio), 2M+ context window, reasoning modes</unique-features>
+        </metadata>
+
+        <documentation>
+            <core-resources category="prompting-guides">
+                <cookbook-repo>https://github.com/google-gemini/cookbook.git</cookbook-repo>
+                <gemini-3-best-practices>https://ai.google.dev/gemini-api/docs/gemini-3?thinking=high#prompting_best_practices</gemini-3-best-practices>
+                <prompting-strategies>https://ai.google.dev/gemini-api/docs/prompting-strategies.md.txt</prompting-strategies>
+            </core-resources>
+
+            <model-specific category="prompting-guides">
+                <gemini-3-pro>
+                    <key-differences>
+                        Gemini 3 is a reasoning model with distinct prompting requirements:
+
+                        **Precision over Verbosity**
+                            • Use concise, direct instructions
+                            • Avoid complex prompt engineering patterns designed for earlier models
+                            • Model may over-analyze verbose or overly structured prompts
+
+                        **Output Characteristics**
+                            • Default behavior is less verbose, more direct
+                            • Explicitly request conversational tone if needed: "Explain as a friendly, talkative assistant"
+                            • Prefers efficiency and clarity in responses
+
+                        **Context Management for Large Data**
+                            • Place specific questions/instructions at the END of the prompt
+                            • Provide data context first, then ask questions
+                            • Anchor reasoning with phrases like "Based on the information above..."
+                            • Works well with entire codebases, books, or long videos in context
+
+                        **Reasoning Mode**
+                            • Leverage "thinking" parameter for complex problem-solving
+                            • Model shows its reasoning process transparently
+                            • Best for multi-step logic, debugging, and analysis tasks
+                    </key-differences>
+                </gemini-3-pro>
+            </model-specific>
+        </documentation>
+    </google-gemini>
+
+    <cursor>
+        <metadata>
+            <config-format>.cursorrules file (custom Markdown-like format), config files</config-format>
+            <unique-features>Composer multi-file editing, codebase indexing, custom rules system</unique-features>
+        </metadata>
+
+        <documentation category="platform-specific">
+            <rules-documentation>https://cursor.com/docs/context/rules</rules-documentation>
+            <api-documentation>https://cursor.com/docs/api</api-documentation>
+            <notes>
+                Cursor uses .cursorrules files for project-specific instructions.
+                Rules are written in a custom format that combines Markdown and directives.
+                Supports @-mentions for files, folders, and documentation.
+            </notes>
+        </documentation>
+    </cursor>
+
+    <zed>
+        <metadata>
+            <config-format>JSON configuration files (~/.config/zed/settings.json)</config-format>
+            <unique-features>Collaborative editing, integrated terminal, minimal design</unique-features>
+        </metadata>
+
+        <documentation category="platform-specific">
+            <note>
+                Zed's AI assistant configuration is part of the broader settings system.
+                Requires external documentation lookup or community resources.
+                Consider adding: https://zed.dev/docs/assistant
+            </note>
+        </documentation>
+    </zed>
+
+    <continue-dev>
+        <metadata>
+            <config-format>JSON (~/.continue/config.json)</config-format>
+            <unique-features>VS Code + JetBrains support, custom slash commands, context providers</unique-features>
+        </metadata>
+
+        <documentation category="platform-specific">
+            <note>
+                Continue.dev is an open-source Copilot alternative with extensive customization.
+                Configuration includes model selection, context providers, and custom commands.
+                Consider adding: https://docs.continue.dev/reference/config
+            </note>
+        </documentation>
+    </continue-dev>
+
+    <mcp-protocol>
+        <metadata>
+            <purpose>Standard protocol for connecting AI assistants to external data and tools</purpose>
+            <specification-version>1.0+</specification-version>
+        </metadata>
+
+        <official-documentation category="mcp">
+            <concepts>
+                <connect-local-servers>https://modelcontextprotocol.io/docs/develop/connect-local-servers</connect-local-servers>
+                <build-server>https://modelcontextprotocol.io/docs/develop/build-server</build-server>
+                <build-client>https://modelcontextprotocol.io/docs/develop/build-client</build-client>
+                <debugging>https://modelcontextprotocol.io/legacy/tools/debugging</debugging>
+            </concepts>
+        </official-documentation>
+
+        <sdk-libraries category="mcp">
+            <python>https://github.com/modelcontextprotocol/python-sdk.git</python>
+            <typescript>https://github.com/modelcontextprotocol/typescript-sdk.git</typescript>
+            <rust>https://github.com/modelcontextprotocol/rust-sdk.git</rust>
+        </sdk-libraries>
+
+        <implementation-notes>
+            MCP enables:
+                • Connecting AI assistants to databases, APIs, and file systems
+                • Creating reusable tools that work across platforms
+                • Extending AI capabilities beyond built-in features
+                • Standardizing context provision across different AI clients
+
+            Key for PromptPortal:
+                • Define canonical MCP server configurations
+                • Provide templates for common integrations (Postgres, GitHub, Jira, etc.)
+                • Document how different platforms consume MCP servers
+        </implementation-notes>
+    </mcp-protocol>
+
+    <additional-platforms>
+        <note>
+            Consider expanding to include:
+                • Cody (Sourcegraph): https://sourcegraph.com/docs/cody
+                • Tabnine: https://docs.tabnine.com/
+                • Amazon CodeWhisperer: https://docs.aws.amazon.com/codewhisperer/
+                • Replit Ghostwriter: https://replit.com/site/ghostwriter
+                • JetBrains AI Assistant: https://www.jetbrains.com/help/idea/ai-assistant.html
+        </note>
+    </additional-platforms>
+
+    <community-resources>
+        <prompt-libraries category="examples">
+            <awesome-chatgpt-prompts>https://github.com/f/awesome-chatgpt-prompts</awesome-chatgpt-prompts>
+            <prompt-engineering-guide>https://github.com/dair-ai/Prompt-Engineering-Guide</prompt-engineering-guide>
+            <langchain-hub>https://smith.langchain.com/hub</langchain-hub>
+        </prompt-libraries>
+
+        <best-practices category="best-practices">
+            <note>
+                Consider aggregating research papers and articles on:
+                    • Few-shot vs. zero-shot prompting
+                    • Chain-of-thought prompting
+                    • ReAct (reasoning + acting) patterns
+                    • Constitutional AI and harmlessness
+                    • Prompt injection prevention
+            </note>
+        </best-practices>
+    </community-resources>
+</resources>
+
+<implementation-roadmap>
+    <phase number="1" name="Foundation & MCP Server Documentation">
+        <milestone>Document existing mort-sh/PromptPortal structure and content library (300+ items)</milestone>
+        <milestone>Create comprehensive usage guides for mort-sh/PromptPortal-MCP server</milestone>
+        <milestone>Test and validate MCP server integrations with VS Code, Visual Studio, Claude Desktop</milestone>
+        <milestone>Establish contribution guidelines for adding new prompts/instructions to canonical format</milestone>
+        <milestone>Set up CI/CD for automated validation of YAML frontmatter and Markdown structure</milestone>
+    </phase>
+
+    <phase number="2" name="Core Translation Engine (Static Strategy)">
+        <milestone>Design platform adapter architecture and plugin system</milestone>
+        <milestone>Implement Cursor adapter (.cursorrules generator with @-mentions support)</milestone>
+        <milestone>Implement Claude API adapter (system prompt formatter)</milestone>
+        <milestone>Implement OpenAI API adapter (message array formatter with function calling)</milestone>
+        <milestone>Build CLI tool (`promptportal translate`) for format conversion and batch deployment</milestone>
+        <milestone>Create validation framework with platform-specific schema checks</milestone>
+        <milestone>Establish compatibility matrix and feature detection system</milestone>
+    </phase>
+
+    <phase number="3" name="Expanded Platform Support">
+        <milestone>Add Gemini API adapter (contents array with system instructions)</milestone>
+        <milestone>Add Zed adapter (JSON settings.json generator)</milestone>
+        <milestone>Add Continue.dev adapter (config.json with context providers)</milestone>
+        <milestone>Implement platform-specific optimization (token limits, prompt reformatting)</milestone>
+        <milestone>Build testing framework with input/output examples for each platform</milestone>
+        <milestone>Create migration guides from platform-specific to universal formats</milestone>
+    </phase>
+
+    <phase number="4" name="Developer Experience & Tooling">
+        <milestone>Build web-based catalog/marketplace for browsing prompts and instructions</milestone>
+        <milestone>Implement search and discovery features (tags, categories, popularity)</milestone>
+        <milestone>Create VS Code extension for in-editor prompt management</milestone>
+        <milestone>Add CI/CD integration examples (GitHub Actions, Azure Pipelines)</milestone>
+        <milestone>Develop quality scoring system (effectiveness metrics, community ratings)</milestone>
+        <milestone>Build import/export utilities for existing platform-specific configurations</milestone>
+    </phase>
+
+    <phase number="5" name="Community & Ecosystem">
+        <milestone>Launch public contribution process with review guidelines</milestone>
+        <milestone>Establish governance model for community-contributed content</milestone>
+        <milestone>Integrate analytics for tracking usage patterns and effectiveness</milestone>
+        <milestone>Create plugin/extension system for custom platform adapters</milestone>
+        <milestone>Provide migration tools between static and MCP approaches</milestone>
+        <milestone>Build partnerships with AI tool vendors for official support</milestone>
+    </phase>
+</implementation-roadmap>
+
+<example-use-cases>
+    <use-case>
+        <scenario>Enterprise standardization</scenario>
+        <description>
+            A company wants all developers to follow the same coding standards and security practices
+            across GitHub Copilot, Cursor, and Claude API. They maintain a single PromptPortal repository
+            with their standards and automatically deploy to all platforms using the CLI tool for static
+            configs.
+        </description>
+        <strategy>Static Translation</strategy>
+    </use-case>
+
+    <use-case>
+        <scenario>Dynamic context serving for Claude Desktop users</scenario>
+        <description>
+            A development team uses Claude Desktop as their primary AI assistant. Instead of managing
+            .cursorrules files or Copilot JSON configs, they run the PromptPortal-MCP server locally,
+            which serves prompts and instructions dynamically based on their current project context.
+            The MCP server automatically provides relevant coding standards, best practices, and
+            project-specific guidelines without any file management.
+        </description>
+        <strategy>MCP Server (Dynamic)</strategy>
+    </use-case>
+
+    <use-case>
+        <scenario>Open-source project guidelines</scenario>
+        <description>
+            An OSS project provides a .promptportal/ directory with project-specific prompts, instructions,
+            and agent configurations. Contributors using different AI tools all get consistent guidance.
+            Those with MCP-compatible clients can connect directly to the project's MCP server, while
+            others use the generated config files.
+        </description>
+        <strategy>Hybrid (both Static and MCP)</strategy>
+    </use-case>
+
+    <use-case>
+        <scenario>Personal productivity library</scenario>
+        <description>
+            A developer maintains a personal collection of prompts for common tasks (code reviews,
+            documentation, refactoring). When switching from VS Code to Cursor, they simply re-export
+            their library in the new format using the CLI. Alternatively, they can run the MCP server
+            and have all their prompts available in any MCP-compatible tool without reconfiguration.
+        </description>
+        <strategy>User's choice (Static or MCP)</strategy>
+    </use-case>
+
+    <use-case>
+        <scenario>Specialized domain agents</scenario>
+        <description>
+            A data science team creates domain-specific agents with deep knowledge of their tech stack
+            (PyTorch, Pandas, MLflow). The agents are defined once in the PromptPortal format and work
+            across their entire toolchain, whether deployed as static configs or served via MCP.
+        </description>
+        <strategy>Hybrid (both Static and MCP)</strategy>
+    </use-case>
+
+    <use-case>
+        <scenario>Team with mixed tooling preferences</scenario>
+        <description>
+            A development team uses a variety of AI tools: some prefer GitHub Copilot in VS Code,
+            others use Cursor, and a few use Claude Desktop. The team maintains one PromptPortal
+            repository. GitHub Copilot and Cursor users receive static config files via CI/CD, while
+            Claude Desktop users connect to the shared MCP server for real-time updates.
+        </description>
+        <strategy>Hybrid (both Static and MCP)</strategy>
+    </use-case>
+</example-use-cases>
